@@ -565,7 +565,9 @@ function buildChordDiagramSVG(chordName) {
   // フレット→Y座標（中心）
   const fy = f => mT + nutH + (f - def.startFret + 0.5) * fretSp;
 
-  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  // 左90°回転: SVGのwidth/heightを入れ替え、内側をtranslate+rotateで変換
+  let s = `<svg width="${H}" height="${W}" viewBox="0 0 ${H} ${W}" xmlns="http://www.w3.org/2000/svg">`;
+  s += `<g transform="translate(0, ${W}) rotate(-90)">`;
 
   // 背景
   s += `<rect width="${W}" height="${H}" rx="10" fill="rgba(0,0,0,0.55)"/>`;
@@ -618,7 +620,7 @@ function buildChordDiagramSVG(chordName) {
     s += `<text x="${x}" y="${H - mB + 2}" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="8">${sNum}弦</text>`;
   }
 
-  s += '</svg>';
+  s += `</g></svg>`;
   return s;
 }
 
