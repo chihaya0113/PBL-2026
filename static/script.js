@@ -604,7 +604,7 @@ function buildChordDiagramSVG(chordName) {
     const x = sx(dot.string);
     const y = fy(dot.fret);
     s += `<circle cx="${x}" cy="${y}" r="${dotR.toFixed(1)}" fill="${color}" opacity="0.95"/>`;
-    s += `<text x="${x}" y="${(y + 4).toFixed(1)}" text-anchor="middle" fill="#1a1a2e" font-size="11" font-weight="bold" transform="rotate(90, ${x}, ${(y + 4).toFixed(1)})">${dot.finger}</text>`;
+    s += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" fill="#1a1a2e" font-size="11" font-weight="bold" transform="rotate(90, ${x}, ${y})">${dot.finger}</text>`;
   });
 
   // フレット番号（左側）
