@@ -131,30 +131,59 @@ header h1 {
   text-align: center;
 }
 
-/* ダイアグラム＋ヒント行を横並び */
+/* ダイアグラム4枚＋ヒントを縦積み */
 #chord-hint-area {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  gap: 10px;
   margin-top: 8px;
 }
 
-#chord-diagram-container {
-  flex-shrink: 0;
+/* 4枚横並び */
+#all-chords-diagrams {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-#chord-diagram-container svg {
+.chord-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 6px 4px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  transition: all 0.2s ease;
+  opacity: 0.35;
+}
+
+.chord-card.active {
+  opacity: 1;
+  border-color: currentColor;
+  box-shadow: 0 0 18px rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+}
+
+.chord-card-name {
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.chord-card svg {
   display: block;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.1));
 }
 
 #chord-hint-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
-  min-height: 120px;
+  gap: 6px;
   justify-content: center;
 }
 

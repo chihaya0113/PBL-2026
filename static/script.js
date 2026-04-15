@@ -127,7 +127,7 @@ const startBtn            = document.getElementById('start-btn');
 const countdownOverlay    = document.getElementById('countdown-overlay');
 const countdownNumber     = document.getElementById('countdown-number');
 const currentChordName    = document.getElementById('current-chord-name');
-const chordDiagramContainer = document.getElementById('chord-diagram-container');
+const allChordsContainer = document.getElementById('all-chords-diagrams');
 const chordHintText       = document.getElementById('chord-hint-text');
 const pauseBtn  = document.getElementById('pause-btn');
 const tempoBtns = document.querySelectorAll('.tempo-btn');
@@ -501,7 +501,7 @@ function drawHitEffects() {
   }
 }
 
-// ===== コード表示 + ダイアグラム + ヒント更新 =====
+// ===== コード表示 + ダイアグラムハイライト + ヒント更新 =====
 function updateChordDisplay(chord) {
   if (!chord) return;
   const prev = currentChordName.dataset.chord;
@@ -513,8 +513,13 @@ function updateChordDisplay(chord) {
   currentChordName.style.transform = 'scale(1.18)';
   setTimeout(() => { currentChordName.style.transform = 'scale(1)'; }, 130);
 
-  chordDiagramContainer.innerHTML = buildChordDiagramSVG(chord);
-  chordHintText.innerHTML         = buildHintHTML(chord);
+  // アクティブカードをハイライト
+  CHORDS.forEach(c => {
+    const card = document.getElementById(`chord-card-${c}`);
+    if (card) card.classList.toggle('active', c === chord);
+  });
+
+  chordHintText.innerHTML = buildHintHTML(chord);
 }
 
 // ===== 子ども向けフィンガーヒントHTML生成 =====
@@ -721,11 +726,14 @@ function stopGame() {
   pauseBtn.classList.remove('visible', 'paused');
   pauseBtn.textContent = '⏸ 一時停止';
 
-  currentChordName.textContent    = '-';
-  currentChordName.className      = '';
-  currentChordName.dataset.chord  = '';
-  chordDiagramContainer.innerHTML = '';
-  chordHintText.innerHTML         = '';
+  currentChordName.textContent   = '-';
+  currentChordName.className     = '';
+  currentChordName.dataset.chord = '';
+  CHORDS.forEach(c => {
+    const card = document.getElementById(`chord-card-${c}`);
+    if (card) card.classList.remove('active');
+  });
+  chordHintText.innerHTML = '';
 }
 
 // ===== テンポ切替 =====
@@ -772,5 +780,16 @@ function roundRect(ctx, x, y, w, h, r) {
 }
 
 // ===== 初期化 =====
+function initChordDiagrams() {
+  CHORDS.forEach(chord => {
+    const card = document.createElement('div');
+    card.className = `chord-card chord-${chord}`;
+    card.id = `chord-card-${chord}`;
+    card.innerHTML = `<div class="chord-card-name chord-${chord}">${chord}</div>${buildChordDiagramSVG(chord)}`;
+    allChordsContainer.appendChild(card);
+  });
+}
+
 resizeCanvas();
 drawGrid();
+initChordDiagrams();
