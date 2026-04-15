@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ギターの数字遊び</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ヘッダー -->
+    <header>
+      <h1>🎸 ギターの数字遊び</h1>
+    </header>
+
+    <!-- カウントダウンオーバーレイ -->
+    <div id="countdown-overlay" class="hidden">
+      <div id="countdown-number"></div>
+    </div>
+
+    <!-- ゲームエリア -->
+    <div id="game-area">
+      <!-- ノーツレーン（タイミングボックスはCanvas内に描画） -->
+      <div id="lane-container">
+        <canvas id="game-canvas"></canvas>
+      </div>
+
+      <!-- 現在のコード表示 -->
+      <div id="current-chord-display">
+        <div id="current-chord-label">いま弾くコード</div>
+        <div id="current-chord-name">-</div>
+        <div id="chord-hint-area">
+          <div id="chord-diagram-container"></div>
+          <div id="chord-hint-text"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- コントロールパネル -->
+    <div id="controls">
+      <div id="tempo-selector">
+        <span class="ctrl-label">テンポ</span>
+        <button class="tempo-btn active" data-tempo="30">🐢 ゆっくり</button>
+        <button class="tempo-btn" data-tempo="60">🎵 ふつう</button>
+        <button class="tempo-btn" data-tempo="90">🔥 はやい</button>
+      </div>
+      <div id="mode-selector">
+        <span class="ctrl-label">モード</span>
+        <button class="mode-btn active" data-beats="1">♩ 1拍</button>
+        <button class="mode-btn" data-beats="4">♩×4 4拍</button>
+      </div>
+      <button id="pause-btn">⏸ 一時停止</button>
+      <button id="start-btn">▶ スタート</button>
+    </div>
+
+    <!-- コード説明 -->
+    <div id="chord-legend">
+      <div class="legend-item G">G</div>
+      <div class="legend-item C">C</div>
+      <div class="legend-item D">D</div>
+      <div class="legend-item Em">Em</div>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
