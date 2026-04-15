@@ -593,7 +593,7 @@ function buildChordDiagramSVG(chordName) {
     const x  = sx(sNum);
     const iy = mT - 9;
     if (def.muted?.includes(sNum)) {
-      s += `<text x="${x}" y="${iy}" text-anchor="middle" fill="#FF6B6B" font-size="12" font-weight="bold">✕</text>`;
+      s += `<text x="${x}" y="${iy}" text-anchor="middle" fill="#FF6B6B" font-size="12" font-weight="bold" transform="rotate(90, ${x}, ${iy})">✕</text>`;
     } else if (def.openStrings?.includes(sNum)) {
       s += `<circle cx="${x}" cy="${iy - 2}" r="4.5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>`;
     }
@@ -604,20 +604,20 @@ function buildChordDiagramSVG(chordName) {
     const x = sx(dot.string);
     const y = fy(dot.fret);
     s += `<circle cx="${x}" cy="${y}" r="${dotR.toFixed(1)}" fill="${color}" opacity="0.95"/>`;
-    s += `<text x="${x}" y="${(y + 4).toFixed(1)}" text-anchor="middle" fill="white" font-size="11" font-weight="bold">${dot.finger}</text>`;
+    s += `<text x="${x}" y="${(y + 4).toFixed(1)}" text-anchor="middle" fill="#1a1a2e" font-size="11" font-weight="bold" transform="rotate(90, ${x}, ${(y + 4).toFixed(1)})">${dot.finger}</text>`;
   });
 
   // フレット番号（左側）
   for (let f = 1; f <= fretCount; f++) {
     const y = mT + nutH + (f - 0.5) * fretSp;
-    s += `<text x="${mL - 9}" y="${(y + 4).toFixed(1)}" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="9">${f}</text>`;
+    s += `<text x="${mL - 9}" y="${(y + 4).toFixed(1)}" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="9" transform="rotate(90, ${mL - 9}, ${(y + 4).toFixed(1)})">${f}</text>`;
   }
 
   // 弦番号（下側、1〜6）
   for (let i = 0; i < strings; i++) {
     const x    = mL + i * strSp;
     const sNum = 6 - i;
-    s += `<text x="${x}" y="${H - mB + 2}" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="8">${sNum}弦</text>`;
+    s += `<text x="${x}" y="${H - mB + 2}" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="8" transform="rotate(90, ${x}, ${H - mB + 2})">${sNum}弦</text>`;
   }
 
   s += `</g></svg>`;
