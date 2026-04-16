@@ -796,6 +796,15 @@ function initChordDiagrams() {
     card.className = `chord-card chord-${chord}`;
     card.id = `chord-card-${chord}`;
     card.innerHTML = `<div class="chord-card-name chord-${chord}">${chord}</div>${buildChordDiagramSVG(chord)}`;
+
+    // ゲーム停止中はクリックでコード情報を切り替え
+    card.addEventListener('click', () => {
+      if (!state.running) {
+        currentChordName.dataset.chord = ''; // 同じコードでも再表示できるようリセット
+        updateChordDisplay(chord);
+      }
+    });
+
     allChordsContainer.appendChild(card);
   });
 }
