@@ -570,8 +570,8 @@ function buildChordDiagramSVG(chordName) {
   // フレット→Y座標（中心）
   const fy = f => mT + nutH + (f - def.startFret + 0.5) * fretSp;
 
-  // 左90°回転: SVGのwidth/heightを入れ替え、内側をtranslate+rotateで変換
-  let s = `<svg width="${H}" height="${W}" viewBox="0 0 ${H} ${W}" xmlns="http://www.w3.org/2000/svg">`;
+  // 左90°回転: width/heightはCSSに委ねてviewBoxのみ指定
+  let s = `<svg viewBox="0 0 ${H} ${W}" xmlns="http://www.w3.org/2000/svg">`;
   s += `<g transform="translate(0, ${W}) rotate(-90)">`;
 
   // 背景

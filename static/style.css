@@ -74,6 +74,15 @@ header h1 {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 0;
+}
+
+/* ===== 2カラムエリア ===== */
+#bottom-area {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  min-height: 0;
 }
 
 /* ===== レーン ===== */
@@ -95,8 +104,9 @@ header h1 {
 
 /* タイミングボックスはCanvas内に描画 */
 
-/* ===== 現在のコード ===== */
+/* ===== 現在のコード（左カラム） ===== */
 #current-chord-display {
+  flex: 1;
   text-align: center;
   padding: 10px 16px;
   background: rgba(255, 255, 255, 0.05);
@@ -104,6 +114,11 @@ header h1 {
   border: 2px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
 }
 
 #current-chord-display::before {
@@ -122,7 +137,7 @@ header h1 {
 }
 
 #current-chord-name {
-  font-size: 7rem;
+  font-size: 5rem;
   font-weight: 900;
   line-height: 1;
   transition: all 0.15s ease;
@@ -131,21 +146,14 @@ header h1 {
   text-align: center;
 }
 
-/* ダイアグラム4枚＋ヒントを縦積み */
-#chord-hint-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-/* 4枚横並び */
+/* 右カラム：2×2グリッド */
 #all-chords-diagrams {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
-  justify-content: center;
-  align-items: flex-start;
+  flex-shrink: 0;
+  width: 260px;
+  align-content: center;
 }
 
 .chord-card {
@@ -159,6 +167,7 @@ header h1 {
   background: rgba(255,255,255,0.03);
   transition: all 0.2s ease;
   opacity: 0.35;
+  min-width: 0;
 }
 
 .chord-card.active {
@@ -176,6 +185,8 @@ header h1 {
 
 .chord-card svg {
   display: block;
+  width: 100%;
+  height: auto;
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.1));
 }
 
@@ -212,6 +223,8 @@ header h1 {
   align-items: flex-start;
   gap: 6px;
   justify-content: center;
+  margin-top: 8px;
+  width: 100%;
 }
 
 .hint-row {
@@ -442,13 +455,14 @@ header h1 {
 /* ===== レスポンシブ ===== */
 @media (max-width: 600px) {
   header h1 { font-size: 1.2rem; }
-  #current-chord-name { font-size: 4.5rem; min-width: 110px; }
-  .hint-row { font-size: 0.95rem; gap: 8px; }
-  .hint-pos { font-size: 0.95rem; }
-  .hint-finger { min-width: 60px; font-size: 0.85rem; }
-  #lane-container { height: 130px; }
+  #current-chord-name { font-size: 3.5rem; }
+  .hint-row { font-size: 0.85rem; gap: 6px; }
+  .hint-pos { font-size: 0.85rem; }
+  .hint-finger { min-width: 50px; font-size: 0.8rem; }
+  #lane-container { height: 110px; }
   #start-btn { padding: 12px 28px; font-size: 1rem; }
   #pause-btn { padding: 12px 20px; font-size: 1rem; }
-  #chord-hint-area { gap: 12px; }
-  #chord-hint-text { min-height: 90px; }
+  /* モバイルは縦積みに切替 */
+  #bottom-area { flex-direction: column; }
+  #all-chords-diagrams { width: 100%; grid-template-columns: repeat(4, 1fr); }
 }
