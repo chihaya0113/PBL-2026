@@ -779,15 +779,45 @@ function roundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
+// ===== メモ: localStorage への読み書き =====
+function loadMemo(chord) {
+  return localStorage.getItem(`chord-memo-${chord}`) || '';
+}
+
+function saveMemo(chord, text) {
+  localStorage.setItem(`chord-memo-${chord}`, text);
+}
+
 // ===== 初期化 =====
 function initChordDiagrams() {
   CHORDS.forEach(chord => {
     const card = document.createElement('div');
     card.className = `chord-card chord-${chord}`;
     card.id = `chord-card-${chord}`;
+
+    const textarea = document.createElement('textarea');
+    textarea.className   = 'chord-memo';
+    textarea.placeholder = 'メモを追加...';
+    textarea.value       = loadMemo(chord);
+    textarea.addEventListener('input', () => {
+      saveMemo(chord, textarea.value);
+      autoResizeMemo(textarea);
+    });
+    // ゲームのキー操作と干渉しないようにバブリングを止める
+    textarea.addEventListener('keydown', e => e.stopPropagation());
+
     card.innerHTML = `<div class="chord-card-name chord-${chord}">${chord}</div>${buildChordDiagramSVG(chord)}`;
+    card.appendChild(textarea);
     allChordsContainer.appendChild(card);
+
+    // 初期高さ調整
+    autoResizeMemo(textarea);
   });
+}
+
+function autoResizeMemo(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
 }
 
 resizeCanvas();
