@@ -146,14 +146,13 @@ header h1 {
   text-align: center;
 }
 
-/* 右カラム：2×2グリッド */
+/* 左カラム内：4枚横並び */
 #all-chords-diagrams {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 8px;
-  flex-shrink: 0;
-  width: 260px;
-  align-content: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .chord-card {
@@ -288,77 +287,51 @@ header h1 {
 .chord-Em { color: #FFA726; }
 
 
-/* ===== コントロール ===== */
+/* ===== コントロール（右カラム） ===== */
 #controls {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 10px;
+  width: 160px;
+  flex-shrink: 0;
   justify-content: center;
-  flex-wrap: wrap;
+  padding: 12px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(255,255,255,0.1);
 }
 
+#tempo-selector,
 #mode-selector {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.05);
-  padding: 8px 14px;
-  border-radius: 50px;
+  flex-direction: column;
+  gap: 6px;
 }
 
+.ctrl-label {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tempo-btn,
 .mode-btn {
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.6);
   border: 1px solid rgba(255,255,255,0.15);
-  padding: 6px 14px;
+  padding: 7px 10px;
   border-radius: 50px;
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  width: 100%;
+  text-align: center;
 }
 
+.tempo-btn:hover,
 .mode-btn:hover {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-.mode-btn.active {
-  background: linear-gradient(135deg, #CE93D8, #9C27B0);
-  color: #fff;
-  font-weight: 700;
-  border-color: transparent;
-  box-shadow: 0 0 20px rgba(156,39,176,0.4);
-}
-
-#tempo-selector {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.05);
-  padding: 8px 14px;
-  border-radius: 50px;
-}
-
-.ctrl-label {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 0.1em;
-}
-
-.tempo-btn {
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.6);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 6px 14px;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-
-.tempo-btn:hover {
   background: rgba(255,255,255,0.15);
   color: #fff;
 }
@@ -368,21 +341,37 @@ header h1 {
   color: #1a1a2e;
   font-weight: 700;
   border-color: transparent;
-  box-shadow: 0 0 20px rgba(255,215,0,0.4);
+  box-shadow: 0 0 16px rgba(255,215,0,0.4);
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, #CE93D8, #9C27B0);
+  color: #fff;
+  font-weight: 700;
+  border-color: transparent;
+  box-shadow: 0 0 16px rgba(156,39,176,0.4);
+}
+
+#action-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 #start-btn {
   background: linear-gradient(135deg, #00E676, #00B0FF);
   color: #1a1a2e;
   border: none;
-  padding: 14px 40px;
+  padding: 12px 10px;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 900;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 0 30px rgba(0,230,118,0.4);
-  letter-spacing: 0.05em;
+  box-shadow: 0 0 20px rgba(0,230,118,0.4);
+  letter-spacing: 0.03em;
+  width: 100%;
 }
 
 #start-btn:hover {
@@ -403,19 +392,20 @@ header h1 {
   background: linear-gradient(135deg, #FFD700, #FF8C00);
   color: #1a1a2e;
   border: none;
-  padding: 14px 28px;
+  padding: 12px 10px;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 900;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 0 24px rgba(255,215,0,0.35);
-  letter-spacing: 0.05em;
+  box-shadow: 0 0 16px rgba(255,215,0,0.35);
+  letter-spacing: 0.03em;
+  width: 100%;
   display: none;
 }
 
 #pause-btn.visible {
-  display: inline-block;
+  display: block;
 }
 
 #pause-btn:hover {
@@ -455,14 +445,12 @@ header h1 {
 /* ===== レスポンシブ ===== */
 @media (max-width: 600px) {
   header h1 { font-size: 1.2rem; }
-  #current-chord-name { font-size: 3.5rem; }
+  #current-chord-name { font-size: 3rem; }
   .hint-row { font-size: 0.85rem; gap: 6px; }
   .hint-pos { font-size: 0.85rem; }
   .hint-finger { min-width: 50px; font-size: 0.8rem; }
   #lane-container { height: 110px; }
-  #start-btn { padding: 12px 28px; font-size: 1rem; }
-  #pause-btn { padding: 12px 20px; font-size: 1rem; }
-  /* モバイルは縦積みに切替 */
+  /* モバイルは縦積み */
   #bottom-area { flex-direction: column; }
-  #all-chords-diagrams { width: 100%; grid-template-columns: repeat(4, 1fr); }
+  #controls { width: 100%; flex-direction: row; flex-wrap: wrap; }
 }

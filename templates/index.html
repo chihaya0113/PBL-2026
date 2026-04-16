@@ -27,33 +27,35 @@
 
       <!-- 2カラムエリア -->
       <div id="bottom-area">
-        <!-- 左：現在のコード表示 -->
+
+        <!-- 左：コード情報 -->
         <div id="current-chord-display">
           <div id="current-chord-label">いま弾くコード</div>
           <div id="current-chord-name">-</div>
+          <div id="all-chords-diagrams"></div>
           <div id="chord-hint-text"></div>
         </div>
 
-        <!-- 右：全コードカード 2×2 -->
-        <div id="all-chords-diagrams"></div>
-      </div>
-    </div>
+        <!-- 右：コントロール -->
+        <div id="controls">
+          <div id="tempo-selector">
+            <span class="ctrl-label">テンポ</span>
+            <button class="tempo-btn active" data-tempo="30">🐢 ゆっくり</button>
+            <button class="tempo-btn" data-tempo="60">🎵 ふつう</button>
+            <button class="tempo-btn" data-tempo="90">🔥 はやい</button>
+          </div>
+          <div id="mode-selector">
+            <span class="ctrl-label">モード</span>
+            <button class="mode-btn active" data-beats="1">♩ 1拍</button>
+            <button class="mode-btn" data-beats="4">♩×4 4拍</button>
+          </div>
+          <div id="action-btns">
+            <button id="pause-btn">⏸ 一時停止</button>
+            <button id="start-btn">▶ スタート</button>
+          </div>
+        </div>
 
-    <!-- コントロールパネル -->
-    <div id="controls">
-      <div id="tempo-selector">
-        <span class="ctrl-label">テンポ</span>
-        <button class="tempo-btn active" data-tempo="30">🐢 ゆっくり</button>
-        <button class="tempo-btn" data-tempo="60">🎵 ふつう</button>
-        <button class="tempo-btn" data-tempo="90">🔥 はやい</button>
       </div>
-      <div id="mode-selector">
-        <span class="ctrl-label">モード</span>
-        <button class="mode-btn active" data-beats="1">♩ 1拍</button>
-        <button class="mode-btn" data-beats="4">♩×4 4拍</button>
-      </div>
-      <button id="pause-btn">⏸ 一時停止</button>
-      <button id="start-btn">▶ スタート</button>
     </div>
   </div>
 
