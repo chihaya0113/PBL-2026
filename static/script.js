@@ -733,18 +733,8 @@ function stopGame() {
   pauseBtn.classList.remove('visible', 'paused');
   pauseBtn.textContent = '⏸ 一時停止';
 
-  currentChordName.textContent   = '-';
-  currentChordName.className     = '';
-  currentChordName.dataset.chord = '';
-  CHORDS.forEach(c => {
-    const card = document.getElementById(`chord-card-${c}`);
-    if (card) card.classList.remove('active');
-  });
-  chordHintText.innerHTML    = '';
-  memoChordName.textContent  = 'コードを選択';
-  memoChordName.style.color  = '';
-  memoTextarea.value         = '';
-  memoTextarea.placeholder   = 'ここに練習メモを書こう...';
+  // スタンバイ状態に戻す
+  showStandby();
 }
 
 // ===== テンポ切替 =====
@@ -823,3 +813,11 @@ memoTextarea.addEventListener('keydown', e => e.stopPropagation());
 resizeCanvas();
 drawGrid();
 initChordDiagrams();
+
+// ===== スタンバイ表示（スタート前にG コードを見せておく）=====
+function showStandby() {
+  // dataset.chord をリセットして updateChordDisplay が通るようにする
+  currentChordName.dataset.chord = '';
+  updateChordDisplay(CHORDS[0]);
+}
+showStandby();
