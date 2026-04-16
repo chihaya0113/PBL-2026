@@ -520,6 +520,13 @@ function updateChordDisplay(chord) {
   });
 
   chordHintText.innerHTML = buildHintHTML(chord);
+
+  // メモエリアを切り替え
+  const color = CHORD_COLORS[chord]?.fill || '#fff';
+  memoChordName.textContent  = chord;
+  memoChordName.style.color  = color;
+  memoTextarea.value         = loadMemo(chord);
+  memoTextarea.placeholder   = `${chord} の練習メモを書こう...`;
 }
 
 // ===== 子ども向けフィンガーヒントHTML生成 =====
@@ -733,7 +740,11 @@ function stopGame() {
     const card = document.getElementById(`chord-card-${c}`);
     if (card) card.classList.remove('active');
   });
-  chordHintText.innerHTML = '';
+  chordHintText.innerHTML    = '';
+  memoChordName.textContent  = 'コードを選択';
+  memoChordName.style.color  = '';
+  memoTextarea.value         = '';
+  memoTextarea.placeholder   = 'ここに練習メモを書こう...';
 }
 
 // ===== テンポ切替 =====
@@ -794,31 +805,20 @@ function initChordDiagrams() {
     const card = document.createElement('div');
     card.className = `chord-card chord-${chord}`;
     card.id = `chord-card-${chord}`;
-
-    const textarea = document.createElement('textarea');
-    textarea.className   = 'chord-memo';
-    textarea.placeholder = 'メモを追加...';
-    textarea.value       = loadMemo(chord);
-    textarea.addEventListener('input', () => {
-      saveMemo(chord, textarea.value);
-      autoResizeMemo(textarea);
-    });
-    // ゲームのキー操作と干渉しないようにバブリングを止める
-    textarea.addEventListener('keydown', e => e.stopPropagation());
-
     card.innerHTML = `<div class="chord-card-name chord-${chord}">${chord}</div>${buildChordDiagramSVG(chord)}`;
-    card.appendChild(textarea);
     allChordsContainer.appendChild(card);
-
-    // 初期高さ調整
-    autoResizeMemo(textarea);
   });
 }
 
-function autoResizeMemo(el) {
-  el.style.height = 'auto';
-  el.style.height = el.scrollHeight + 'px';
-}
+// ===== 大きなメモエリアの初期化 =====
+const memoTextarea  = document.getElementById('memo-textarea');
+const memoChordName = document.getElementById('memo-chord-name');
+
+memoTextarea.addEventListener('input', () => {
+  const chord = currentChordName.dataset.chord;
+  if (chord) saveMemo(chord, memoTextarea.value);
+});
+memoTextarea.addEventListener('keydown', e => e.stopPropagation());
 
 resizeCanvas();
 drawGrid();

@@ -189,31 +189,57 @@ header h1 {
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.1));
 }
 
-.chord-memo {
-  width: 100%;
-  min-height: 36px;
+/* ===== メモエリア（大） ===== */
+#chord-memo-area {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  flex: 1;
+  min-height: 0;
+}
+
+#memo-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#memo-chord-name {
+  font-size: 0.9rem;
+  font-weight: 900;
+  transition: color 0.2s;
+}
+
+#memo-textarea {
+  flex: 1;
+  min-height: 80px;
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  color: rgba(255,255,255,0.85);
-  font-size: 0.75rem;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.95rem;
   font-family: inherit;
-  line-height: 1.5;
-  padding: 5px 7px;
+  line-height: 1.7;
+  padding: 10px 14px;
   resize: none;
-  overflow: hidden;
   outline: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
   box-sizing: border-box;
 }
 
-.chord-memo::placeholder {
-  color: rgba(255,255,255,0.25);
+#memo-textarea::placeholder {
+  color: rgba(255,255,255,0.2);
 }
 
-.chord-memo:focus {
-  border-color: rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.1);
+#memo-textarea:focus {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.09);
 }
 
 #chord-hint-text {
