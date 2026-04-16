@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #1e1b4b 0%, #1a237e 45%, #1565c0 100%);
+  background: linear-gradient(135deg, #1a1a35 0%, #1a2050 50%, #1a3060 100%);
   min-height: 100vh;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #fff;
@@ -82,7 +82,7 @@ header h1 {
 }
 
 @keyframes flash-fade {
-  0%   { opacity: 0.45; }
+  0%   { opacity: 0.18; }
   100% { opacity: 0; }
 }
 
