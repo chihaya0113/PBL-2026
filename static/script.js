@@ -507,11 +507,22 @@ function updateChordDisplay(chord) {
   const prev = currentChordName.dataset.chord;
   if (prev === chord) return;
 
-  currentChordName.dataset.chord   = chord;
-  currentChordName.textContent     = chord;
-  currentChordName.className       = `chord-${chord}`;
-  currentChordName.style.transform = 'scale(1.18)';
-  setTimeout(() => { currentChordName.style.transform = 'scale(1)'; }, 130);
+  currentChordName.dataset.chord = chord;
+  currentChordName.textContent   = chord;
+  currentChordName.className     = `chord-${chord}`;
+
+  // バウンスアニメーション
+  currentChordName.classList.remove('popping');
+  void currentChordName.offsetWidth; // reflow で animation をリセット
+  currentChordName.classList.add('popping');
+
+  // フラッシュエフェクト
+  const chordFlash = document.getElementById('chord-flash');
+  const flashColor = CHORD_COLORS[chord]?.fill || '#fff';
+  chordFlash.style.background = flashColor;
+  chordFlash.classList.remove('flashing');
+  void chordFlash.offsetWidth;
+  chordFlash.classList.add('flashing');
 
   // アクティブカードをハイライト
   CHORDS.forEach(c => {
