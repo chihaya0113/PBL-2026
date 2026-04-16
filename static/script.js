@@ -516,14 +516,6 @@ function updateChordDisplay(chord) {
   void currentChordName.offsetWidth; // reflow で animation をリセット
   currentChordName.classList.add('popping');
 
-  // フラッシュエフェクト
-  const chordFlash = document.getElementById('chord-flash');
-  const flashColor = CHORD_COLORS[chord]?.fill || '#fff';
-  chordFlash.style.background = flashColor;
-  chordFlash.classList.remove('flashing');
-  void chordFlash.offsetWidth;
-  chordFlash.classList.add('flashing');
-
   // アクティブカードをハイライト
   CHORDS.forEach(c => {
     const card = document.getElementById(`chord-card-${c}`);
